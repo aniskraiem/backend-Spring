@@ -11,7 +11,7 @@ import tn.esprit.spring.service.ProduitService;
 import java.util.List;
 @RestController
 @Api(tags="gestion des produits")
-@RequestMapping("/produit")
+@RequestMapping("/produit/")
 @Slf4j
 @CrossOrigin
 public class ProduitRestController {
@@ -37,10 +37,10 @@ public class ProduitRestController {
             return p;
         }
 
-        @PutMapping("update/{id]")
-        public Produit update(@PathVariable("id")Long id,@RequestBody Produit produit)
+        @PutMapping("update/{id}")
+        public Produit update(@RequestBody Produit produit,@PathVariable Long id)
 
-        {return produitService.update(id,produit);
+        {return produitService.update(produit,id);
 
         }
 

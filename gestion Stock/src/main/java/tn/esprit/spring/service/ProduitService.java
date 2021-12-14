@@ -1,5 +1,4 @@
 package tn.esprit.spring.service;
-import java.util.Date;
 import java.util.List;
 
 import tn.esprit.spring.entity.Produit;
@@ -10,7 +9,8 @@ public interface ProduitService {
 	Produit addProduit(Produit p);
 	void deleteProduit(Long id);
 
-	Produit update(Long id, Produit produit);
+	Produit update(Produit produit,Long id);
+
 
 	Produit retrieveProduit(Long id);
 	

@@ -4,16 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -34,8 +25,13 @@ public class Produit implements Serializable {
 	private String libelle;
 	@Column(name="prixUnitaire")
 	private float prixUnitaire;
-	@OneToOne
-	private DetailProduit DetailProduit;
+	@Column(name="categorie")
+	private String categorie;
+	@Column(name="quantite")
+	private long quantite;
+	@Temporal(TemporalType.DATE)
+	@Column(name="dateajout")
+	private Date dateajout = new Date(System.currentTimeMillis());
 	@ManyToMany(cascade=CascadeType.ALL)
 	private Set<Fournisseur> Fournisseurs;
 	@ManyToOne
@@ -52,10 +48,13 @@ public class Produit implements Serializable {
 	public Produit() {
 	}
 
-	public Produit(String code, String libelle, float prixUnitaire) {
+	public Produit(String code, String libelle, float prixUnitaire,String categorie,Long quantite,Date dateajout) {
 		this.code = code;
 		this.libelle = libelle;
 		this.prixUnitaire = prixUnitaire;
+		this.categorie= categorie;
+		this.quantite= quantite;
+		this.dateajout= dateajout;
 	}
 
 	public long getIdProduit() {
@@ -90,12 +89,28 @@ public class Produit implements Serializable {
 		this.prixUnitaire = prixUnitaire;
 	}
 
-	public tn.esprit.spring.entity.DetailProduit getDetailProduit() {
-		return DetailProduit;
+	public String getCategorie() {
+		return categorie;
 	}
 
-	public void setDetailProduit(tn.esprit.spring.entity.DetailProduit detailProduit) {
-		DetailProduit = detailProduit;
+	public void setCategorie(String categorie) {
+		this.categorie = categorie;
+	}
+
+	public long getQuantite() {
+		return quantite;
+	}
+
+	public void setQuantite(long quantite) {
+		this.quantite = quantite;
+	}
+
+	public Date getDateajout() {
+		return dateajout;
+	}
+
+	public void setDateajout(Date dateajout) {
+		this.dateajout = dateajout;
 	}
 
 	public Set<Fournisseur> getFournisseurs() {
@@ -137,7 +152,9 @@ public class Produit implements Serializable {
 				", code='" + code + '\'' +
 				", libelle='" + libelle + '\'' +
 				", prixUnitaire=" + prixUnitaire +
-				", DetailProduit=" + DetailProduit +
+				", categorie=" + categorie +
+				", quantite=" + quantite +
+				", dateajout=" + dateajout +
 				", Fournisseurs=" + Fournisseurs +
 				", Rayon=" + Rayon +
 				", detailFacture=" + detailFacture +

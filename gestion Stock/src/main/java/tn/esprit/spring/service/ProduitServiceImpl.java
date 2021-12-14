@@ -1,12 +1,10 @@
 package tn.esprit.spring.service;
 
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import org.springframework.web.bind.annotation.PathVariable;
 import tn.esprit.spring.entity.*;
 import tn.esprit.spring.repository.FactureRepository;
 import tn.esprit.spring.repository.FournisseurRepository;
@@ -42,14 +40,13 @@ public class ProduitServiceImpl implements ProduitService{
 	}
 
 	@Override
-	public Produit update(Long id,Produit p)
+	public Produit update(Produit p,Long id)
 	{
-		p=  pr.findById(id).get();
+
 		return pr.save(p);
 	}
 
-	//	Produit produit = pr.findById(idProduit).get();
-		//pr.delete(produit);
+
 
 
 

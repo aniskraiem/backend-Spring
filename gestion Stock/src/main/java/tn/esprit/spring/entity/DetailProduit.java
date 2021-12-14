@@ -4,21 +4,10 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
 
 import lombok.Getter;
 import lombok.Setter;
-
-import javax.persistence.OneToOne;
 
 
 @Entity
@@ -29,7 +18,10 @@ public class DetailProduit  implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="idDetailProduit")
-	private long idDetailProduit; 
+	private long idDetailProduit;
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "idProduit", referencedColumnName = "idProduit")
+	private Produit produit;
 	@Temporal(TemporalType.DATE)
 	@Column(name="dateCreation")
 	private Date dateCreation;
@@ -39,15 +31,14 @@ public class DetailProduit  implements Serializable {
 	@Enumerated(EnumType.STRING)
 	@Column(name="categorieProduit")
 	private CategorieProduit categorieProduit;
-	@OneToOne(mappedBy="DetailProduit")
-	private Produit Produit;
 
 
-	public DetailProduit(Date dateCreation, Date dateDerniereModification, CategorieProduit categorieProduit, tn.esprit.spring.entity.Produit produit) {
+	public DetailProduit(long idDetailProduit, Date dateCreation, Date dateDerniereModification, CategorieProduit categorieProduit, Produit produit) {
+		this.idDetailProduit = idDetailProduit;
 		this.dateCreation = dateCreation;
 		this.dateDerniereModification = dateDerniereModification;
 		this.categorieProduit = categorieProduit;
-		Produit = produit;
+		this.produit = produit;
 	}
 
 	public DetailProduit() {
