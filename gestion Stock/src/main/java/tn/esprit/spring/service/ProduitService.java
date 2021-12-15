@@ -9,7 +9,7 @@ public interface ProduitService {
 	Produit addProduit(Produit p);
 	void deleteProduit(Long id);
 
-	Produit update(Produit produit,Long id);
+		Produit update(Produit produit,Long id);
 
 
 	Produit retrieveProduit(Long id);

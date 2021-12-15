@@ -25,7 +25,7 @@ public class ProduitServiceImpl implements ProduitService{
 	RayonRepository rayonRepo;
 	@Override
 	public List<Produit> retrieveAllProduits() {
-		return pr.findAll();
+			return pr.findAll();
 	}
 
 	@Override
